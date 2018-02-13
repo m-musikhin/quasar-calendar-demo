@@ -130,7 +130,8 @@ export default {
             dateTime: '2018-02-16 16:30:00',
             isAllDay: false,
             timeZone: 'American/New_York'
-          }
+          },
+          color: 'positive'
         },
         {
           id: 3,
@@ -205,7 +206,9 @@ export default {
             dateTime: '2018-02-13 07:30:00',
             isAllDay: false,
             timeZone: 'American/New_York'
-          }
+          },
+          color: 'warning',
+          textColor: 'dark'
         },
         {
           id: 8,
@@ -235,7 +238,6 @@ export default {
     },
     moveSampleDatesAhead: function () {
       // function to take dates in our demo eventArray and move them to the near future
-      console.debug('moveSampleDatesAhead called')
       const dateSet1 = [1, 3],
         dateSet2 = [4, 5, 6, 7, 8],
         addDays1 = 2,
@@ -243,10 +245,6 @@ export default {
       for (let counter = 0; counter < this.eventArray.length; counter++) {
         let currentItem = this.eventArray[counter]
         // dateset 1
-        console.debug(
-          currentItem.id,
-          dateSet1.indexOf(currentItem.id)
-        )
         if (dateSet1.indexOf(currentItem.id) >= 0) {
           currentItem = this.adjustStartEndDates(currentItem, addDays1)
         }
