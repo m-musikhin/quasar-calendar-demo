@@ -69,6 +69,7 @@
 
 <script>
 import {
+  date,
   openURL,
   QLayout,
   QToolbar,
@@ -231,9 +232,74 @@ export default {
   methods: {
     launch (url) {
       openURL(url)
+    },
+    moveSampleDatesAhead: function () {
+      // function to take dates in our demo eventArray and move them to the near future
+      console.debug('moveSampleDatesAhead called')
+      const dateSet1 = [1, 3],
+        dateSet2 = [4, 5, 6, 7, 8],
+        addDays1 = 2,
+        addDays2 = 5
+      for (let counter = 0; counter < this.eventArray.length; counter++) {
+        let currentItem = this.eventArray[counter]
+        // dateset 1
+        console.debug(
+          currentItem.id,
+          dateSet1.indexOf(currentItem.id)
+        )
+        if (dateSet1.indexOf(currentItem.id) >= 0) {
+          currentItem = this.adjustStartEndDates(currentItem, addDays1)
+        }
+        // dateset 2
+        if (dateSet2.indexOf(currentItem.id) >= 0) {
+          currentItem = this.adjustStartEndDates(currentItem, addDays2)
+        }
+        this.eventArray[counter] = currentItem
+      }
+    },
+    adjustStartEndDates: function (eventItem, numDays) {
+      eventItem.start.dateTime = this.getSqlDateFormat(
+        this.setADateToADay(
+          eventItem.start.dateTime,
+          numDays
+        )
+      )
+      eventItem.end.dateTime = this.getSqlDateFormat(
+        this.setADateToADay(
+          eventItem.end.dateTime,
+          numDays
+        )
+      )
+      return eventItem
+    },
+    setADateToADay: function (dateObject, addDays) {
+      let now = new Date()
+      if (typeof dateObject === 'string') {
+        dateObject = new Date(dateObject)
+      }
+      dateObject = date.adjustDate(
+        dateObject, {
+          year: now.getFullYear(),
+          month: now.getMonth() + 1,
+          date: now.getDate()
+        }
+      )
+      if (addDays !== undefined) {
+        dateObject = date.addToDate(
+          dateObject, {
+            days: addDays
+          }
+        )
+      }
+      return dateObject
+    },
+    getSqlDateFormat: function (dateObject) {
+      return date.formatDate(dateObject, 'YYYY-MM-DD HH:mm:ss')
     }
   },
-  mounted () {},
+  created () {
+    this.moveSampleDatesAhead()
+  },
   beforeDestroy () {}
 }
 </script>
