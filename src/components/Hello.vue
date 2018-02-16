@@ -35,7 +35,9 @@
                 </span>
             </q-card-title>
             <q-card-main>
-                <calendar :event-array="eventArray" />
+                <calendar
+                    :event-array="eventArray"
+                />
             </q-card-main>
         </q-card>
 
@@ -47,7 +49,9 @@
                 </span>
             </q-card-title>
             <q-card-main>
-                <calendar-month :event-array="eventArray" />
+                <calendar-month
+                    :event-array="eventArray"
+                />
             </q-card-main>
         </q-card>
 
@@ -59,7 +63,10 @@
                 </span>
             </q-card-title>
             <q-card-main>
-                <calendar-multi-day :event-array="eventArray" scrollHeight="400px" />
+                <calendar-multi-day
+                    :event-array="eventArray"
+                    scrollHeight="400px"
+                />
             </q-card-main>
         </q-card>
 
@@ -121,6 +128,7 @@ export default {
           id: 1,
           summary: 'Test event',
           description: 'Some extra info goes here',
+          location: 'Office of the Divine Randomness, 1232 Main St., Denver, CO',
           start: {
             dateTime: '2018-02-16 14:00:00',
             isAllDay: false,
@@ -131,7 +139,41 @@ export default {
             isAllDay: false,
             timeZone: 'American/New_York'
           },
-          color: 'positive'
+          color: 'positive',
+          attendees: [
+            {
+              id: 5,
+              email: 'somebody@somewhere.com',
+              displayName: 'John Q. Public',
+              organizer: false,
+              self: false,
+              resource: false
+            },
+            {
+              id: 5,
+              email: 'somebody@somewhere.com',
+              displayName: 'John Q. Public',
+              organizer: false,
+              self: false,
+              resource: false
+            },
+            {
+              id: 5,
+              email: 'somebody@somewhere.com',
+              displayName: 'John Q. Public',
+              organizer: false,
+              self: false,
+              resource: false
+            },
+            {
+              id: 31,
+              email: '',
+              displayName: 'South Conference Room',
+              organizer: false,
+              self: false,
+              resource: true
+            }
+          ]
         },
         {
           id: 3,
