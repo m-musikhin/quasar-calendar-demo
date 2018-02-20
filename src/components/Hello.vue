@@ -99,6 +99,7 @@ import {
   CalendarMultiDay,
   CalendarAgenda
 } from 'quasar-calendar'
+
 export default {
   name: 'index',
   components: {
@@ -130,12 +131,12 @@ export default {
           description: 'Some extra info goes here',
           location: 'Office of the Divine Randomness, 1232 Main St., Denver, CO',
           start: {
-            dateTime: '2018-02-16 14:00:00',
+            dateTime: '2018-02-16T14:00:00Z',
             isAllDay: false,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-16 16:30:00',
+            dateTime: '2018-02-16T16:30:00Z',
             isAllDay: false,
             timeZone: 'American/New_York'
           },
@@ -150,7 +151,7 @@ export default {
               resource: false
             },
             {
-              id: 5,
+              id: 6,
               email: 'somebody@somewhere.com',
               displayName: 'John Q. Public',
               organizer: false,
@@ -158,7 +159,7 @@ export default {
               resource: false
             },
             {
-              id: 5,
+              id: 7,
               email: 'somebody@somewhere.com',
               displayName: 'John Q. Public',
               organizer: false,
@@ -180,12 +181,12 @@ export default {
           summary: 'Test event 2',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-16 17:30:00',
+            dateTime: '2018-02-16T17:30:00Z',
             isAllDay: false,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-16 18:30:00',
+            dateTime: '2018-02-16T18:30:00Z',
             isAllDay: false,
             timeZone: 'American/New_York'
           }
@@ -195,12 +196,12 @@ export default {
           summary: 'Test event 3',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13 10:30:00',
+            dateTime: '2018-02-13T10:30:00Z',
             isAllDay: false,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13 13:00:00',
+            dateTime: '2018-02-13T13:00:00Z',
             isAllDay: false,
             timeZone: 'American/New_York'
           }
@@ -210,12 +211,12 @@ export default {
           summary: 'All day event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13 00:00:00',
+            dateTime: '2018-02-13T00:00:00Z',
             isAllDay: true,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13 00:00:00',
+            dateTime: '2018-02-13T00:00:00Z',
             isAllDay: true,
             timeZone: 'American/New_York'
           }
@@ -225,12 +226,12 @@ export default {
           summary: 'Overlapping event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13 11:30:00',
+            dateTime: '2018-02-13T11:30:00Z',
             isAllDay: false,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13 12:30:00',
+            dateTime: '2018-02-13T12:30:00Z',
             isAllDay: false,
             timeZone: 'American/New_York'
           }
@@ -240,12 +241,12 @@ export default {
           summary: 'Some event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13 06:30:00',
+            dateTime: '2018-02-13T06:30:00Z',
             isAllDay: false,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13 07:30:00',
+            dateTime: '2018-02-13T07:30:00Z',
             isAllDay: false,
             timeZone: 'American/New_York'
           },
@@ -257,12 +258,12 @@ export default {
           summary: 'Some other event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13 16:00:00',
+            dateTime: '2018-02-13T16:00:00Z',
             isAllDay: false,
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13 17:00:00',
+            dateTime: '2018-02-13T17:00:00Z',
             isAllDay: false,
             timeZone: 'American/New_York'
           }
@@ -334,7 +335,7 @@ export default {
       return dateObject
     },
     getSqlDateFormat: function (dateObject) {
-      return date.formatDate(dateObject, 'YYYY-MM-DD HH:mm:ss')
+      return date.formatDate(dateObject, 'YYYY-MM-DDTHH:mm:ssZ')
     }
   },
   created () {
@@ -345,15 +346,4 @@ export default {
 </script>
 
 <style lang="stylus">
-.logo-container
-  width 255px
-  height 242px
-  perspective 800px
-  position absolute
-  top 50%
-  left 50%
-  transform translateX(-50%) translateY(-50%)
-.logo
-  position absolute
-  transform-style preserve-3d
 </style>
