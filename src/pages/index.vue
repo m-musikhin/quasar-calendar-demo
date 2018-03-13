@@ -1,118 +1,74 @@
 <template>
-  <q-layout
-    ref="layout"
-    view="lHh Lpr fff"
-    :left-class="{'bg-grey-2': true}"
-  >
-    <q-toolbar slot="header">
-      <q-toolbar-title>
-        Quasar Calendar Demo
-        <div slot="subtitle">Running on Quasar v{{$q.version}}</div>
-      </q-toolbar-title>
-    </q-toolbar>
-
-    <!--<div slot="left">-->
-      <!--&lt;!&ndash;-->
-        <!--Use <q-side-link> component-->
-        <!--instead of <q-item> for-->
-        <!--internal vue-router navigation-->
-      <!--&ndash;&gt;-->
-    <!--</div>-->
-
-    <!--
-      Replace following <div> with
-      <router-view /> component
-      if using subRoutes
-    -->
-    <!--<div class="layout-padding logo-container non-selectable no-pointer-events">-->
-    <div class="layout-padding">
-
-        <q-card>
-            <q-card-title>
-                Full calendar component
-                <span slot="subtitle">
+  <q-page padding class="row NOflex NOflex-center">
+      <q-card inline class="full-width q-ma-sm">
+          <q-card-title>
+              Full calendar component
+              <span slot="subtitle">
                     A multifunction component that displays calendar information in a variety of predefined formats.
                 </span>
-            </q-card-title>
-            <q-card-main>
-                <calendar
-                    :event-array="eventArray"
-                />
-            </q-card-main>
-        </q-card>
+          </q-card-title>
+          <q-card-main>
+              <calendar
+                  :event-array="eventArray"
+              />
+          </q-card-main>
+      </q-card>
 
-        <q-card>
-            <q-card-title>
-                Individual month view component
-                <span slot="subtitle">
+      <q-card inline class="full-width q-ma-sm">
+          <q-card-title>
+              Individual month view component
+              <span slot="subtitle">
                     Example of a single component displayed. Acts independently of any other calendar component on the same page.
                 </span>
-            </q-card-title>
-            <q-card-main>
-                <calendar-month
-                    :event-array="eventArray"
-                />
-            </q-card-main>
-        </q-card>
+          </q-card-title>
+          <q-card-main>
+              <calendar-month
+                  :event-array="eventArray"
+              />
+          </q-card-main>
+      </q-card>
 
-        <q-card>
-            <q-card-title>
-                Individual multi-day / week view component
-                <span slot="subtitle">
+      <q-card class="full-width q-ma-sm">
+          <q-card-title>
+              Individual multi-day / week view component
+              <span slot="subtitle">
                     The multi-day component. This can be configured as a proper full-week display (shown), a single day or a multi-day. The number of days shown and the number of days moved in the navigation are adjustable.
                 </span>
-            </q-card-title>
-            <q-card-main>
-                <calendar-multi-day
-                    :event-array="eventArray"
-                    scrollHeight="400px"
-                />
-            </q-card-main>
-        </q-card>
-
-    </div>
-  </q-layout>
+          </q-card-title>
+          <q-card-main>
+              <calendar-multi-day
+                  :event-array="eventArray"
+                  scrollHeight="400px"
+              />
+          </q-card-main>
+      </q-card>
+  </q-page>
 </template>
+
+<style lang="stylus">
+</style>
 
 <script>
 import {
   date,
-  openURL,
-  QLayout,
-  QToolbar,
-  QToolbarTitle,
-  QBtn,
-  QIcon,
-  QList,
-  QListHeader,
-  QItem,
-  QItemSide,
-  QItemMain,
+  QPage,
   QCard,
   QCardTitle,
   QCardMain,
-  QCardSeparator
+  QCardSeparator,
+  QIcon
 } from 'quasar'
+import dashHas from 'lodash.has'
 import {
   Calendar,
   CalendarMonth,
   CalendarMultiDay,
   CalendarAgenda
 } from 'quasar-calendar'
-
 export default {
-  name: 'index',
+  name: 'PageIndex',
   components: {
-    QLayout,
-    QToolbar,
-    QToolbarTitle,
-    QBtn,
-    QIcon,
-    QList,
-    QListHeader,
-    QItem,
-    QItemSide,
-    QItemMain,
+    QPage,
     QCard,
     QCardTitle,
     QCardMain,
@@ -120,7 +76,8 @@ export default {
     Calendar,
     CalendarMonth,
     CalendarMultiDay,
-    CalendarAgenda
+    CalendarAgenda,
+    QIcon
   },
   data () {
     return {
@@ -211,14 +168,65 @@ export default {
           summary: 'All day event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13T00:00:00Z',
-            isAllDay: true,
-            timeZone: 'America/New_York'
+            date: '2018-02-13'
           },
           end: {
-            dateTime: '2018-02-13T00:00:00Z',
-            isAllDay: true,
-            timeZone: 'American/New_York'
+            date: '2018-02-13'
+          }
+        },
+        {
+          id: 103,
+          summary: 'All day x4',
+          description: 'Some extra info goes here',
+          start: {
+            date: '2018-02-15'
+          },
+          end: {
+            date: '2018-02-18'
+          }
+        },
+        {
+          id: 101,
+          summary: 'All day x3',
+          description: 'Some extra info goes here',
+          start: {
+            date: '2018-02-14'
+          },
+          end: {
+            date: '2018-02-16'
+          }
+        },
+        {
+          id: 102,
+          summary: 'All day x2',
+          description: 'Some extra info goes here',
+          start: {
+            date: '2018-02-14'
+          },
+          end: {
+            date: '2018-02-15'
+          }
+        },
+        {
+          id: 104,
+          summary: 'All day x4 #2',
+          description: 'Some extra info goes here',
+          start: {
+            date: '2018-02-14'
+          },
+          end: {
+            date: '2018-02-17'
+          }
+        },
+        {
+          id: 105,
+          summary: 'All day x4 #3',
+          description: 'Some extra info goes here',
+          start: {
+            date: '2018-02-14'
+          },
+          end: {
+            date: '2018-02-17'
           }
         },
         {
@@ -276,41 +284,93 @@ export default {
   },
   computed: {},
   methods: {
-    launch (url) {
-      openURL(url)
-    },
     moveSampleDatesAhead: function () {
       // function to take dates in our demo eventArray and move them to the near future
-      const dateSet1 = [1, 3],
-        dateSet2 = [4, 5, 6, 7, 8],
-        addDays1 = 2,
-        addDays2 = 5
-      for (let counter = 0; counter < this.eventArray.length; counter++) {
-        let currentItem = this.eventArray[counter]
-        // dateset 1
-        if (dateSet1.indexOf(currentItem.id) >= 0) {
-          currentItem = this.adjustStartEndDates(currentItem, addDays1)
+      const dateAdjustments = [
+        {
+          ids: [4, 5, 6, 7, 8],
+          addDays: 5
+        },
+        {
+          ids: [1, 3],
+          addDays: 2
+        },
+        {
+          ids: [102, 103],
+          addDays: 8
+        },
+        {
+          ids: [101],
+          addDays: 10
+        },
+        {
+          ids: [104],
+          addDays: 11
+        },
+        {
+          ids: [105],
+          addDays: 13
         }
-        // dateset 2
-        if (dateSet2.indexOf(currentItem.id) >= 0) {
-          currentItem = this.adjustStartEndDates(currentItem, addDays2)
+      ]
+      for (let counter = 0; counter <= this.eventArray.length; counter++) {
+        let currentItem = this.eventArray[counter]
+        for (let thisAdjustment of dateAdjustments) {
+          console.debug('thisAdjustment = ', thisAdjustment)
+          if (thisAdjustment.ids.indexOf(currentItem.id) >= 0) {
+            currentItem = this.adjustStartEndDates(currentItem, thisAdjustment.addDays)
+          }
         }
         this.eventArray[counter] = currentItem
       }
     },
     adjustStartEndDates: function (eventItem, numDays) {
-      eventItem.start.dateTime = this.getSqlDateFormat(
-        this.setADateToADay(
-          eventItem.start.dateTime,
-          numDays
+
+      let daysDiff = 0
+      if (dashHas(eventItem.start, 'dateTime') && dashHas(eventItem.end, 'dateTime')) {
+        // console.debug('has dateTime')
+        daysDiff = date.getDateDiff(
+          new Date(eventItem.end.dateTime),
+          new Date(eventItem.start.dateTime),
+          'days'
         )
-      )
-      eventItem.end.dateTime = this.getSqlDateFormat(
-        this.setADateToADay(
-          eventItem.end.dateTime,
-          numDays
+      }
+      else if (dashHas(eventItem.start, 'date') && dashHas(eventItem.end, 'date')) {
+        // console.debug('has date', Date(eventItem.start.date), Date(eventItem.end.date))
+        // console.debug('has date', JSON.stringify(eventItem))
+        daysDiff = date.getDateDiff(
+          new Date(eventItem.end.date),
+          new Date(eventItem.start.date),
+          'days'
         )
-      )
+      }
+
+      // start dates
+      if (dashHas(eventItem.start, 'dateTime')) {
+        eventItem.start.dateTime = this.getSqlDateFormat(
+          this.setADateToADay(eventItem.start.dateTime, numDays),
+          true
+        )
+      }
+      if (dashHas(eventItem.start, 'date')) {
+        eventItem.start.date = this.getSqlDateFormat(
+          this.setADateToADay(eventItem.start.date + 'T00:00:00Z', numDays),
+          false
+        )
+      }
+
+      // end dates
+      if (dashHas(eventItem.end, 'dateTime')) {
+        eventItem.end.dateTime = this.getSqlDateFormat(
+          this.setADateToADay(eventItem.end.dateTime, numDays + daysDiff),
+          true
+        )
+      }
+      if (dashHas(eventItem.end, 'date')) {
+        eventItem.end.date = this.getSqlDateFormat(
+          this.setADateToADay(eventItem.end.date + 'T00:00:00Z', numDays + daysDiff),
+          false
+        )
+      }
       return eventItem
     },
     setADateToADay: function (dateObject, addDays) {
@@ -334,16 +394,17 @@ export default {
       }
       return dateObject
     },
-    getSqlDateFormat: function (dateObject) {
-      return date.formatDate(dateObject, 'YYYY-MM-DDTHH:mm:ssZ')
+    getSqlDateFormat: function (dateObject, withTime) {
+      if (withTime) {
+        return date.formatDate(dateObject, 'YYYY-MM-DDTHH:mm:ssZ')
+      }
+      else {
+        return date.formatDate(dateObject, 'YYYY-MM-DD')
+      }
     }
   },
   created () {
     this.moveSampleDatesAhead()
-  },
-  beforeDestroy () {}
+  }
 }
 </script>
-
-<style lang="stylus">
-</style>
