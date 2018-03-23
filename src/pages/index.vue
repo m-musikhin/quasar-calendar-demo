@@ -1,6 +1,10 @@
 <template>
   <q-page padding class="row NOflex NOflex-center">
-      <q-card inline class="full-width q-ma-sm">
+      <q-card
+        v-if="showCards.fullCalendar"
+        inline
+        class="full-width q-ma-sm"
+      >
           <q-card-title>
               Full calendar component
               <span slot="subtitle">
@@ -10,11 +14,17 @@
           <q-card-main>
               <calendar
                   :event-array="eventArray"
+                  :sunday-first-day-of-week="false"
+                  NOcalendar-locale="fr"
+                  NOcalendar-timezone="America/Los_Angeles"
               />
           </q-card-main>
       </q-card>
-
-      <q-card inline class="full-width q-ma-sm">
+      <q-card
+        v-if="showCards.month"
+        inline
+        class="full-width q-ma-sm"
+      >
           <q-card-title>
               Individual month view component
               <span slot="subtitle">
@@ -24,11 +34,16 @@
           <q-card-main>
               <calendar-month
                   :event-array="eventArray"
+                  :sunday-first-day-of-week="false"
+                  calendar-locale="fr"
               />
           </q-card-main>
       </q-card>
-
-      <q-card class="full-width q-ma-sm">
+      <q-card
+        v-if="showCards.week"
+        inline
+        class="full-width q-ma-sm"
+      >
           <q-card-title>
               Individual multi-day / week view component
               <span slot="subtitle">
@@ -88,14 +103,12 @@ export default {
           description: 'Some extra info goes here',
           location: 'Office of the Divine Randomness, 1232 Main St., Denver, CO',
           start: {
-            dateTime: '2018-02-16T14:00:00Z',
-            isAllDay: false,
-            timeZone: 'America/New_York'
+            dateTime: '2018-02-16T14:00:00',
+            timeZone: 'Europe/Zurich'
           },
           end: {
-            dateTime: '2018-02-16T16:30:00Z',
-            isAllDay: false,
-            timeZone: 'American/New_York'
+            dateTime: '2018-02-16T16:30:00',
+            timeZone: 'Europe/Zurich'
           },
           color: 'positive',
           attendees: [
@@ -138,14 +151,12 @@ export default {
           summary: 'Test event 2',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-16T17:30:00Z',
-            isAllDay: false,
+            dateTime: '2018-02-16T17:30:00',
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-16T18:30:00Z',
-            isAllDay: false,
-            timeZone: 'American/New_York'
+            dateTime: '2018-02-16T18:30:00',
+            timeZone: 'America/New_York'
           }
         },
         {
@@ -153,14 +164,10 @@ export default {
           summary: 'Test event 3',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13T10:30:00Z',
-            isAllDay: false,
-            timeZone: 'America/New_York'
+            dateTime: '2018-02-13T10:30:00+0500',
           },
           end: {
-            dateTime: '2018-02-13T13:00:00Z',
-            isAllDay: false,
-            timeZone: 'American/New_York'
+            dateTime: '2018-02-13T13:00:00+0500',
           }
         },
         {
@@ -234,14 +241,12 @@ export default {
           summary: 'Overlapping event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13T11:30:00Z',
-            isAllDay: false,
+            dateTime: '2018-02-13T11:30:00',
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13T12:30:00Z',
-            isAllDay: false,
-            timeZone: 'American/New_York'
+            dateTime: '2018-02-13T12:30:00',
+            timeZone: 'America/New_York'
           }
         },
         {
@@ -249,14 +254,12 @@ export default {
           summary: 'Some event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13T06:30:00Z',
-            isAllDay: false,
+            dateTime: '2018-02-13T06:30:00',
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13T07:30:00Z',
-            isAllDay: false,
-            timeZone: 'American/New_York'
+            dateTime: '2018-02-13T07:30:00',
+            timeZone: 'America/New_York'
           },
           color: 'warning',
           textColor: 'dark'
@@ -266,20 +269,20 @@ export default {
           summary: 'Some other event',
           description: 'Some extra info goes here',
           start: {
-            dateTime: '2018-02-13T16:00:00Z',
-            isAllDay: false,
+            dateTime: '2018-02-13T16:00:00',
             timeZone: 'America/New_York'
           },
           end: {
-            dateTime: '2018-02-13T17:00:00Z',
-            isAllDay: false,
-            timeZone: 'American/New_York'
+            dateTime: '2018-02-13T17:00:00',
+            timeZone: 'America/New_York'
           }
         }
       ],
-      startYear: (new Date()).getFullYear(),
-      startMonth: (new Date()).getMonth() + 1,
-      startDay: (new Date()).getDate()
+      showCards: {
+        fullCalendar: true,
+        month: false,
+        week: false,
+      }
     }
   },
   computed: {},
@@ -315,7 +318,7 @@ export default {
       for (let counter = 0; counter <= this.eventArray.length; counter++) {
         let currentItem = this.eventArray[counter]
         for (let thisAdjustment of dateAdjustments) {
-          console.debug('thisAdjustment = ', thisAdjustment)
+          // console.debug('thisAdjustment = ', thisAdjustment)
           if (thisAdjustment.ids.indexOf(currentItem.id) >= 0) {
             currentItem = this.adjustStartEndDates(currentItem, thisAdjustment.addDays)
           }
