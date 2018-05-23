@@ -17,6 +17,7 @@
                   :sunday-first-day-of-week="false"
                   NOcalendar-locale="fr"
                   NOcalendar-timezone="America/Los_Angeles"
+                  event-ref="MYCALENDAR"
               />
           </q-card-main>
       </q-card>
@@ -315,10 +316,9 @@ export default {
           addDays: 13
         }
       ]
-      for (let counter = 0; counter <= this.eventArray.length; counter++) {
+      for (let counter = 0; counter < this.eventArray.length; counter++) {
         let currentItem = this.eventArray[counter]
         for (let thisAdjustment of dateAdjustments) {
-          // console.debug('thisAdjustment = ', thisAdjustment)
           if (thisAdjustment.ids.indexOf(currentItem.id) >= 0) {
             currentItem = this.adjustStartEndDates(currentItem, thisAdjustment.addDays)
           }
